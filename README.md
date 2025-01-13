@@ -11,6 +11,17 @@ Ele é composto por 8 bits, onde cada bit pode ter um valor de 0 ou 1. Portanto,
 
 Por exemplo, na codificação ASCII, o caractere 'A' é representado pelo byte 65, enquanto o caractere 'B' é representado pelo byte 66. Em sistemas de arquivos, os dados são armazenados em bytes, e a manipulação de arquivos geralmente envolve a leitura e escrita de bytes.
 
+## Como os Dados são Sobrescritos Neste Script
+
+### No script, a função alterar_todos_os_bytes realiza a sobrescrita de todos os bytes de um arquivo da seguinte maneira:
+
+  - Leitura do Arquivo: O arquivo é aberto em modo de leitura e escrita binária ("r+b"). O conteúdo do arquivo é lido completamente em uma variável.
+  - Criação de Novo Conteúdo: Um novo bytearray é criado para armazenar os bytes alterados. Para cada byte no conteúdo original, um novo byte aleatório é gerado usando random.randint(0, 255), que produz um valor entre 0 e 255.
+  - Substituição de Bytes: Cada byte original é substituído por um byte aleatório. Isso é feito em um loop que percorre todos os bytes do conteúdo original.
+  - Escrita do Novo Conteúdo: Após a modificação, o ponteiro do arquivo é movido de volta para o início (f.seek(0)), e o novo conteúdo (que agora contém apenas bytes aleatórios) é escrito de volta ao arquivo.
+  - Corte do Arquivo: Se o novo conteúdo for menor que o original (o que não deve acontecer neste caso, já que estamos substituindo todos os bytes), o arquivo é cortado para garantir que não haja dados antigos restantes.
+
+
 ## Funcionalidades
 
 - Sobrescreve todos os bytes de um arquivo com bytes aleatórios.
